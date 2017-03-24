@@ -60,7 +60,10 @@ export default class DynamicChildrenDemo extends Component {
 
   onTextInputChange = (e) => this.setState({searchTerm: e.target.value})
 
-  onSearchClicked = () => this.fetchMovies()
+  onFormSubmit = (e) => {
+    e.preventDefault()
+    this.fetchMovies()
+  }
 
   componentDidMount() {
     this.fetchMovies()
@@ -69,12 +72,14 @@ export default class DynamicChildrenDemo extends Component {
   render () {
     return (
       <div>
-        <input
-          type='text'
-          value={this.state.searchTerm}
-          onChange={this.onTextInputChange}
-        />
-        <button onClick={this.onSearchClicked}>Search now!</button>
+        <form onSubmit={this.onFormSubmit}>
+          <input
+            type='text'
+            value={this.state.searchTerm}
+            onChange={this.onTextInputChange}
+          />
+          <button type='submit'>Search now!</button>
+        </form>
         {this.getTotal()}
         {this.state.showExclusiveMessage && this.getMessage()}
         {!this.state.showExclusiveMessage && this.getContent()}
