@@ -8,8 +8,8 @@ export default class DynamicChildrenDemo extends Component {
     this.state = {
       total: 0,
       results: [],
-      showMessage: true,
-      message: "Loadinggg...",
+      showExclusiveMessage: true,
+      exclusiveMessage: "Loadinggg...",
       searchTerm: this.props.initialSearchTerm
     }
   }
@@ -22,14 +22,14 @@ export default class DynamicChildrenDemo extends Component {
         if (res.Error) {
           this.setState({
             total: 0,
-            showMessage: true,
-            message: "No results found!"
+            showExclusiveMessage: true,
+            exclusiveMessage: "No results found!"
           })
         } else {
           this.setState({
             total: res.totalResults,
             results: res.Search,
-            showMessage: false
+            showExclusiveMessage: false
           })
         }
       })
@@ -43,8 +43,7 @@ export default class DynamicChildrenDemo extends Component {
 
   getMessage(){
     return (
-      this.state.showMessage &&
-      <div>{this.state.message}</div>
+      <div>{this.state.exclusiveMessage}</div>
     )
   }
 
@@ -77,8 +76,8 @@ export default class DynamicChildrenDemo extends Component {
         />
         <button onClick={this.onSearchClicked}>Search now!</button>
         {this.getTotal()}
-        {this.getMessage()}
-        {!this.state.showMessage && this.getContent()}
+        {this.state.showExclusiveMessage && this.getMessage()}
+        {!this.state.showExclusiveMessage && this.getContent()}
       </div>
     )
   }
