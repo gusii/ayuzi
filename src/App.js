@@ -8,6 +8,7 @@ const demos = [
   '04-using-more-children',
   '05-events-alert-on-click',
   '06-hello-state',
+  'childParentCommunication',
   'dynamic-children',
   'encapsulating-libraries',
   'life-cycle',
