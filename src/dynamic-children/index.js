@@ -28,24 +28,36 @@ export default class DynamicChildrenDemo extends Component {
     )
   }
 
+  getTotal(){
+    return(
+      <h1>{this.state.total}</h1>
+    )
+  }
+
+  getLoading(){
+    return (
+      this.state.isLoading &&
+      <div>Loading...</div>
+    )
+  }
+
+  getContent(){
+    return (
+      this.state.results.map((item, idx) =>
+        <div key={idx}>
+          <h2>{item.Title}</h2>
+          <img src={item.Poster} />
+        </div>
+      )
+    )
+  }
 
   render () {
     return (
       <div>
-        <h1>{this.state.total}</h1>
-        {
-          this.state.isLoading &&
-          <div>Loading...</div>
-        }
-        {
-          !this.state.isLoading &&
-          this.state.results.map((item, idx) =>
-            <div key={idx}>
-              <h2>{item.Title}</h2>
-              <img src={item.Poster} />
-            </div>
-          )
-        }
+        {this.getTotal()}
+        {this.getLoading()}
+        {!this.state.isLoading && this.getContent()}
       </div>
     )
   }
