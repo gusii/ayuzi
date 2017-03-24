@@ -8,24 +8,26 @@ export default class DynamicChildrenDemo extends Component {
     this.state = {
       total: 0,
       results: [],
-      isLoading: true
+      isLoading: true,
+      searchTerm: this.props.initialSearchTerm
     }
   }
 
-  componentDidMount() {
-    setTimeout(() =>
-      fetch('http://www.omdbapi.com/?s=fantastic')
-        .then(res => res.json())
-        .then(res => {
-          console.log(res)
-          this.setState({
-            total: res.totalResults,
-            results: res.Search,
-            isLoading: false
-          })
+  fetchMovies() {
+    fetch('http://www.omdbapi.com/?s=' + this.state.searchTerm)
+      .then(res => res.json())
+      .then(res => {
+        console.log(res)
+        this.setState({
+          total: res.totalResults,
+          results: res.Search,
+          isLoading: false
         })
-      , 1000
-    )
+      })
+  }
+
+  componentDidMount() {
+    this.state.searchTerm !== '' && this.fetchMovies()
   }
 
   getTotal(){
