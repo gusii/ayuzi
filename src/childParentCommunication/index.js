@@ -5,14 +5,14 @@ function Child (props) {
 }
 
 export default class Parent extends Component {
-  constructor () {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       clickCount: 0
     }
   }
 
-  addClick = (val) => 
+  addClick = (val) =>
     () => {
       const { clickCount } = this.state
       this.setState({ clickCount: clickCount + val})
@@ -23,8 +23,8 @@ export default class Parent extends Component {
       <div>
         <span>Times clicked: {this.state.clickCount}</span>
         <br/>
-        <Child onClickCallback={this.addClick(1)} label='Increase'/>
-        <Child onClickCallback={this.addClick(-1)} label='Decrease'/>
+        <Child onClickCallback={this.addClick(1)} label={this.props.increaseLabel}/>
+        <Child onClickCallback={this.addClick(-1)} label={this.props.decreaseLabel}/>
       </div>
     )
   }
