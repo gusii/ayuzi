@@ -4,6 +4,10 @@ function Child (props) {
   return <button onClick={props.onClickCallback}>{props.getLabel()}</button>
 }
 
+function Counter (props) {
+  return <span>Times clicked: {props.count}</span>
+}
+
 export default class Parent extends Component {
   constructor(props) {
     super(props)
@@ -29,7 +33,7 @@ export default class Parent extends Component {
   render () {
     return (
       <div>
-        <span>Times clicked: {this.state.clickCount}</span>
+        <Counter count={this.state.clickCount} />
         <br/>
         <Child onClickCallback={this.addClick(1)} getLabel={this.getIncrementLabel}/>
         <Child onClickCallback={this.addClick(-1)} getLabel={this.getDecrementLabel}/>
