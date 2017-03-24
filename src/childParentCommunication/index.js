@@ -12,9 +12,11 @@ export default class Parent extends Component {
     }
   }
 
-  addClick = (val) => {
-    const { clickCount } = this.state
-    this.setState({ clickCount: clickCount + val})
+  addClick(val) {
+    return () => {
+      const { clickCount } = this.state
+      this.setState({ clickCount: clickCount + val})
+    }
   }
 
   render () {
@@ -22,8 +24,8 @@ export default class Parent extends Component {
       <div>
         <span>Times clicked: {this.state.clickCount}</span>
         <br/>
-        <Child onClickCallback={()=>this.addClick(1)} label='Increase'/>
-        <Child onClickCallback={()=>this.addClick(-1)} label='Decrease'/>
+        <Child onClickCallback={this.addClick(1)} label='Increase'/>
+        <Child onClickCallback={this.addClick(-1)} label='Decrease'/>
       </div>
     )
   }
