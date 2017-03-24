@@ -12,12 +12,11 @@ export default class Parent extends Component {
     }
   }
 
-  addClick(val) {
-    return () => {
+  addClick = (val) => 
+    () => {
       const { clickCount } = this.state
       this.setState({ clickCount: clickCount + val})
     }
-  }
 
   render () {
     return (
