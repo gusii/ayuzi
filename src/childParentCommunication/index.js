@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 
 function Child (props) {
-  return <button onClick={props.onClickCallback}>{props.label}</button>
+  return <button onClick={props.onClickCallback}>{props.getLabel()}</button>
 }
 
 export default class Parent extends Component {
@@ -18,13 +18,21 @@ export default class Parent extends Component {
       this.setState({ clickCount: clickCount + val})
     }
 
+  getIncrementLabel = () => {
+    return this.props.incrementLabel
+  }
+
+  getDecrementLabel = () => {
+    return this.props.decrementLabel
+  }
+
   render () {
     return (
       <div>
         <span>Times clicked: {this.state.clickCount}</span>
         <br/>
-        <Child onClickCallback={this.addClick(1)} label={this.props.increaseLabel}/>
-        <Child onClickCallback={this.addClick(-1)} label={this.props.decreaseLabel}/>
+        <Child onClickCallback={this.addClick(1)} getLabel={this.getIncrementLabel}/>
+        <Child onClickCallback={this.addClick(-1)} getLabel={this.getDecrementLabel}/>
       </div>
     )
   }
